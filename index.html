@@ -125,7 +125,12 @@
                     var date = start_date_local.split("T")[0];
                     var day = date.split("-")[2];
                     var distance = (Math.round((activity.distance/1609.34)*100)/100).toFixed(2);
-                    var average_pace = (activity.moving_time/60)/(activity.distance/1609.34);
+                    var average_pace = 0;
+                    if(distance <= 0){
+                        average_pace = 0;
+                    }else{
+                        average_pace = (activity.moving_time/60)/(activity.distance/1609.34);
+                    }
                     var average_pace_min = Math.floor(average_pace);
                     var average_pace_sec = Math.floor((average_pace - average_pace_min)*60).toLocaleString('en-US', {
                         minimumIntegerDigits: 2,
