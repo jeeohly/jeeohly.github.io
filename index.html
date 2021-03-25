@@ -13,10 +13,6 @@
             cursor: pointer;
             color: #65674b !important;
           }
-          .list-group-item {
-            background-color: transparent !important;
-            border: 0 !important;
-          }
         </style>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -60,8 +56,8 @@
             </div>
             <!--center content-->
             <div class="col-md-6">
-                <h5 class="mx-3 mt-3" id="month-title"></h5> 
-                <div id="activities-display"></div>
+                <h5 class="mx-3 my-3" id="month-title"></h5> 
+                <div class="mx-3 mb-3" id="activities-display"></div>
             </div>
         </div>  
       </div>
@@ -117,15 +113,20 @@
             $("#year-list-desktop").toggle();
             $("#"+yearURL+"-desktop").toggle();
             $("#"+monthURL+yearURL).css({"font-size": "110%","font-weight": "bold"});
+            var max_distance = 0;
+            var max_average_speed = 0;
+            var max_elevation_gain = 0;
       
             $.getJSON("https://jeeohly.github.io/stravaActivities/"+year+"/"+month+".json", function(activitiesJson) {
-                console.log(activitiesJson.length)
+                var activitiesJsonLength = activitiesJson.length; 
+                var activitiesJsonIndex = 0;
                 activitiesJson.forEach(function(activity){
-                    var start_date_local = activity.start_date_local;
-                    var date = start_date_local.split("T")[0];
+                    var start_date = activity.start_date;
+                    var date = start_date.split("T")[0];
                     var day = date.split("-")[2];
                     var distance = (Math.round((activity.distance/1609.34)*100)/100).toFixed(2);
                     var average_pace = 0;
+                    var average_speed = activity.average_speed;
                     if(distance <= 0){
                         average_pace = 0;
                     }else{
@@ -137,10 +138,31 @@
                         useGrouping: false
                     });;
                     var elevation_gain = Math.round(activity.total_elevation_gain*3.28084);
-                    document.getElementById("activities-display").innerHTML += "<ul class='list-group list-group-horizontal'><li class='list-group-item'><small><div class='fw'>Day</div></small><strong>"+day+"</strong></li><li class='list-group-item'><small><div class='fw'>Distance</div></small><strong>"+distance+"<small> mi</small></strong></li><li class='list-group-item'><small><div class='fw'>Avg Pace</div></small><strong>"+average_pace_min+":"+average_pace_sec+"</strong><small> /mi</small></li><li class='list-group-item'><small><div class='fw'>Elev. Gain</div></small><strong>"+elevation_gain+"<small> ft</small></strong></li></ul>";
+                    if(parseFloat(distance) > max_distance){
+                        max_distance = distance; 
+                    }
+                    if(average_speed > max_average_speed){
+                        max_average_speed = average_speed;
+                    }
+                    if(elevation_gain > max_elevation_gain){
+                        max_elevation_gain = elevation_gain;
+                    }
+                    document.getElementById("activities-display").innerHTML += "<div class='row'><div class='col'>"+monthNames[monthURL]+" "+day+"</div></div><div class='row'><div class='col-3'><div class='fw'><small>Distance</small></div>"+distance+"<small> mi</small></div><div class='col-9 my-auto'><div class='progress' id='d-"+activitiesJsonIndex+"'>"+distance+"</div></div></div><div class='row'><div class='col'><div class='fw'><small>Avg Pace</small></div>"+average_pace_min+":"+average_pace_sec+"<small> /mi</small></div><div class='col-9 my-auto'><div class='progress' id='m-"+activitiesJsonIndex+"'>"+average_speed+"</div></div></div><div class='row mb-3'><div class='col'><div class='fw'><small>Elev. Gain</small></div>"+elevation_gain+"<small> ft</small></div><div class='col-9 my-auto'><div class='progress' id='e-"+activitiesJsonIndex+"'>"+elevation_gain+"</div></div></div>";
+                    activitiesJsonIndex += 1;
                 });
+                document.getElementById("activities-display").innerHTML += "<h5 class='mb-3' id='top-button'><a onclick='topFunction()'>Back to top</a></h5>";
+                for(i = 0; i < activitiesJsonLength; i++){
+                    var distanceNum = document.getElementById("d-"+i).innerHTML;
+                    var distancePercent = Math.round(distanceNum/max_distance*100);
+                    document.getElementById("d-"+i).innerHTML = "<div class='progress-bar bg-success' role='progressbar' style='width: "+distancePercent+"%'' aria-valuenow='"+distancePercent+"' aria-valuemin='0' aria-valuemax='100'></div>";
+                    var average_speedNum = document.getElementById("m-"+i).innerHTML;
+                    var average_speedPercent = Math.round(average_speedNum/max_average_speed*100);
+                    document.getElementById("m-"+i).innerHTML = "<div class='progress-bar bg-primary' role='progressbar' style='width: "+average_speedPercent+"%'' aria-valuenow='"+average_speedPercent+"' aria-valuemin='0' aria-valuemax='100'></div>";
+                    var elevation_gainNum = document.getElementById("e-"+i).innerHTML;
+                    var elevation_gainPercent = Math.round(elevation_gainNum/max_elevation_gain*100);
+                    document.getElementById("e-"+i).innerHTML = "<div class='progress-bar bg-warning' role='progressbar' style='width: "+elevation_gainPercent+"%'' aria-valuenow='"+elevation_gainPercent+"' aria-valuemin='0' aria-valuemax='100'></div>";
+                }
             });
-
         }
 
         $(document).ajaxError(function(event, msg, settings){
@@ -177,6 +199,11 @@
                 $("#summary-title").css({"font-size": "110%","font-weight": "bold"});
             }
         });
+
+        function topFunction() {
+            document.body.scrollTop = 0; 
+            document.documentElement.scrollTop = 0; 
+        }
     </script>
 </html>
 
