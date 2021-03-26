@@ -35,7 +35,7 @@
                 <div class="ms-1" id="year-list-desktop" style="display: none">
                     <h6 class="mb-3"><a id="summary-title" href="?summary=overall">Summary</a></h6>
                 </div>
-                <h6 class="mb-3"><a href="">Profile</a></h6>
+                <h6 class="mb-3"><a id="profile-title" href="?profile=show">Profile</a></h6>
                 <h6><a href="">Contact</a></h6>
             </div>
             <!--mobile-->
@@ -50,7 +50,7 @@
                     <div class="ms-1" id="year-list-mobile" style="display: none">
                         <h6 class="mb-3"><a href="?summary=overall">Summary</a></h6>
                     </div>
-                    <h6 class="mb-3"><a href="">Profile</a></h6>
+                    <h6 class="mb-3"><a id="profile-title" href="?profile=show">Profile</a></h6>
                     <h6><a href="">Contact</a></h6>
                 </div>
             </div>
@@ -104,6 +104,7 @@
         var yearURL = urlParams.get('year');
         var monthURL = urlParams.get('month');
         var summaryURL = urlParams.get('summary');
+        var profileURL = urlParams.get('profile');
 
         var month = parseInt(monthURL) + 1;
         var year = parseInt(yearURL);
@@ -167,12 +168,12 @@
 
         $(document).ajaxError(function(event, msg, settings){
             if(msg.status == 404){
-                document.getElementById("activities-display").innerHTML = "<li class='bg-transparent list-group-item'>No activities</li>";
+                document.getElementById("activities-display").innerHTML = "No activities";
             }
         });
 
-        if(summaryURL == "overall"){
-            console.log("overall");
+        if(profileURL == "show"){
+            document.getElementById("activities-display").innerHTML = "<div class='mb-3'>Software Developer</div><div class='mb-3'>Education<br>University of Virginia School of Engineering and Applied Science 2020<br>Bachelor of Science in Computer Science</div>";
         }
 
         $(document).ready(function(){
@@ -197,6 +198,9 @@
             if(summaryURL != null){
                 $("#year-list-desktop").toggle();
                 $("#summary-title").css({"font-size": "110%","font-weight": "bold"});
+            }
+            if(profileURL != null){
+                $("#profile-title").css({"font-size": "110%","font-weight": "bold"});
             }
         });
 
