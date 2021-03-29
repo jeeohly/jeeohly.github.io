@@ -148,7 +148,7 @@
                     if(elevation_gain > max_elevation_gain){
                         max_elevation_gain = elevation_gain;
                     }
-                    document.getElementById("activities-display").innerHTML += "<div class='row'><div class='col'>"+monthNames[monthURL]+" "+day+"</div></div><div class='row'><div class='col-3'><div class='fw'><small>Distance</small></div>"+distance+"<small> mi</small></div><div class='col-9 my-auto'><div class='progress' id='d-"+activitiesJsonIndex+"'>"+distance+"</div></div></div><div class='row'><div class='col'><div class='fw'><small>Avg Pace</small></div>"+average_pace_min+":"+average_pace_sec+"<small> /mi</small></div><div class='col-9 my-auto'><div class='progress' id='m-"+activitiesJsonIndex+"'>"+average_speed+"</div></div></div><div class='row mb-3'><div class='col'><div class='fw'><small>Elev. Gain</small></div>"+elevation_gain+"<small> ft</small></div><div class='col-9 my-auto'><div class='progress' id='e-"+activitiesJsonIndex+"'>"+elevation_gain+"</div></div></div>";
+                    document.getElementById("activities-display").innerHTML += "<div class='row'><div class='col'>"+monthNames[monthURL]+" "+day+"</div></div><div class='row'><div class='col-3 text-success'><div class='fw'><small>Distance</small></div><strong>"+distance+"<small> mi</small></strong></div><div class='col-9 my-auto'><div class='progress' id='d-"+activitiesJsonIndex+"'>"+distance+"</div></div></div><div class='row'><div class='col text-primary'><div class='fw'><small>Avg Pace</small></div><strong>"+average_pace_min+":"+average_pace_sec+"<small> /mi</small></strong></div><div class='col-9 my-auto'><div class='progress' id='m-"+activitiesJsonIndex+"'>"+average_speed+"</div></div></div><div class='row mb-3'><div class='col text-danger'><div class='fw'><small>Elev. Gain</small></div><strong>"+elevation_gain+"<small> ft</small></strong></div><div class='col-9 my-auto'><div class='progress' id='e-"+activitiesJsonIndex+"'>"+elevation_gain+"</div></div></div>";
                     activitiesJsonIndex += 1;
                 });
                 document.getElementById("activities-display").innerHTML += "<h5 class='mb-3' id='top-button'><a onclick='topFunction()'>Back to top</a></h5>";
@@ -161,7 +161,7 @@
                     document.getElementById("m-"+i).innerHTML = "<div class='progress-bar bg-primary' role='progressbar' style='width: "+average_speedPercent+"%'' aria-valuenow='"+average_speedPercent+"' aria-valuemin='0' aria-valuemax='100'></div>";
                     var elevation_gainNum = document.getElementById("e-"+i).innerHTML;
                     var elevation_gainPercent = Math.round(elevation_gainNum/max_elevation_gain*100);
-                    document.getElementById("e-"+i).innerHTML = "<div class='progress-bar bg-warning' role='progressbar' style='width: "+elevation_gainPercent+"%'' aria-valuenow='"+elevation_gainPercent+"' aria-valuemin='0' aria-valuemax='100'></div>";
+                    document.getElementById("e-"+i).innerHTML = "<div class='progress-bar bg-danger' role='progressbar' style='width: "+elevation_gainPercent+"%'' aria-valuenow='"+elevation_gainPercent+"' aria-valuemin='0' aria-valuemax='100'></div>";
                 }
             });
         }
