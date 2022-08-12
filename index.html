@@ -4,14 +4,19 @@
 
 <head>
     <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" 
+    crossorigin="anonymous">
 </head>
 
 <body>
-    <div style = "margin: 10%;">
-        <h1>Gio Bot</h1>
-        <p id="response"></p>
-        <input id="message" type="text" placeholder="Say something.."/>
-        <button id="send">Send</button>
+    <div class="container p-5">
+        <h1>Giobot</h1>
+        <ul id="responses" class="list-group list-group-flush"></ul>
+        <div class="input-group fixed-bottom p-5">
+            <input id="message" class="form-control input-dark" type="text" placeholder="say something.."/>
+            <button id="send" type="submit" class="btn btn-dark">enter</button>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" 
