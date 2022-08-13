@@ -9,12 +9,14 @@ function getRandomResponse(responses) {
 }
 
 $("#send").click(function(){
-    $("#responses").append("<li class='list-group-item' style='text-align:right;'>" + $("#message").val() + "</li>");
-    $("#responses").append("<li class='list-group-item'>Giobot: " + getRandomResponse(responses) + "</li>");
-    $("#message").val("");
-    if($("#responses li").length > 20){
-        $("#responses > li").slice(0, 2).remove();
+    if($("#message").val() != ""){
+        $("#responses").append("<span class='float-end'><div class='alert alert-primary float-end'>" + $("#message").val() + "</span></div></span>");
+        $("#responses").append("<span class='float-start'><div class='alert alert-secondary float-start'>Giobot: " + getRandomResponse(responses) + "</div></span>");
     }
+    if($("#responses div").length > 20){
+        $("#responses > ").slice(0, 2).remove();
+    }
+    $("#responses").scrollTop($("#responses")[0].scrollHeight);
 }); 
 
 $(document).on('keypress',function(e) {
