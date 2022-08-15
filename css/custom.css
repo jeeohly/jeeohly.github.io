@@ -1,6 +1,7 @@
 .alert{
     max-width: 75%;
     margin: 10px;
+    border-width: 0px;
 }
 
 .list-group{
