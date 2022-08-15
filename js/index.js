@@ -1,7 +1,7 @@
-var helpDialog = "Giobot: Hi this is Giobot. Send a message to receive a random joke.<br>For my email enter 'email'.<br>For my phone # enter 'phone'.<br>To bring this dialog up again enter 'help'."
+var helpDialog = "Hi this is Giobot. Send a message to receive a random joke.<br>For my email enter 'email'.<br>For my phone # enter 'phone'.<br>To bring this dialog up again enter 'help'."
 
 $( document ).ready(function() {
-    $("#responses").append("<span class='float-start'><div class='alert alert-secondary float-start'>" + helpDialog + "</div></span>").children(':last').hide().fadeIn(500);
+    $("#responses").append("<span class='float-start'><div class='alert alert-secondary float-start'>Giobot: " + helpDialog + "</div></span>").children(':last').hide().fadeIn(500);
 });
 
 // function to cycle border colors for responses 
