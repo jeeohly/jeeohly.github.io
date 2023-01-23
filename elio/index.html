@@ -1,11 +1,16 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="css/styling.css">
 <script>
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    const firstDay = new Date(2022, 11, 6);
-    const today = new Date()
+    const firstDay = new Date(2022, 10, 06);
+    const today = new Date();
+    console.log(firstDay);
+    console.log(today);
     const days = Math.round(Math.abs((today - firstDay) / oneDay));
-    console.log(days)
+    window.onload = function() {
+        document.getElementById("total_days").innerHTML = "Elva and Gio<br><center>" + days + " days</center>";
+    }
 </script>
 <html>
-
+    <div class="content" id="total_days"></div>
 </html>
