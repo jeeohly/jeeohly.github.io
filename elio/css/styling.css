@@ -5,8 +5,8 @@ html {
 }
 
 body {
-	background: #061928;
-	color: #fff;
+	background: #ffb85c;
+	color: black;
 	overflow: hidden;
 }
 
@@ -15,6 +15,7 @@ canvas {
 }
 
 .content {
+    font-family: 'Common Pixel';
     font-size: 30px;
     position: absolute;
     left: 50%;
