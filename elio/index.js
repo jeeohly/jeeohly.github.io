@@ -1,5 +1,5 @@
 const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-const firstDay = new Date(2022, 10, 06);
+const firstDay = new Date(2022, 11, 06);
 const today = new Date();
 console.log(firstDay);
 console.log(today);
