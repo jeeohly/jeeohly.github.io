@@ -5,5 +5,5 @@ console.log(firstDay);
 console.log(today);
 const days = Math.round(Math.abs((today - firstDay) / oneDay));
 window.onload = function() {
-    document.getElementById("total_days").innerHTML += "<center>Elva and Gio<br>" + days + " days</center>";
+    document.getElementById("total_days").innerHTML += "<center>ElVA AND GIO<br>" + days + " DAYS</center>";
 }

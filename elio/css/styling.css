@@ -14,7 +14,7 @@ canvas {
 }
 
 .everything {
-    font-family: sans-serif;
+    font-family: monospace;
     font-size: 30px;
     position: absolute;
     left: 50%;
