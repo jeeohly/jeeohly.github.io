@@ -15,8 +15,8 @@ function switchColor() {
 }
 
 var profileResponses = {
-    'email': 'giolee8@proton.me',
-    'phone': '5102993108',
+    'email': 'bob@bob.com',
+    'phone': '1231231234',
     'help': helpDialog
 }
 
